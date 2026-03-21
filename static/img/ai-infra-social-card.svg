@@ -1,0 +1,19 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F8FBF8"/>
+  <rect x="54" y="54" width="1092" height="522" rx="40" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="4"/>
+  <circle cx="160" cy="142" r="14" fill="#2D6A4F"/>
+  <circle cx="204" cy="142" r="14" fill="#78A38B"/>
+  <circle cx="248" cy="142" r="14" fill="#A8C2B1"/>
+  <path d="M120 212H458" stroke="#2D6A4F" stroke-width="24" stroke-linecap="round"/>
+  <path d="M120 262H786" stroke="#173224" stroke-width="16" stroke-linecap="round"/>
+  <path d="M120 303H700" stroke="#5F786B" stroke-width="16" stroke-linecap="round"/>
+  <rect x="120" y="380" width="240" height="108" rx="24" fill="#F5F8F4" stroke="#DCE7DF" stroke-width="4"/>
+  <rect x="390" y="380" width="240" height="108" rx="24" fill="#F5F8F4" stroke="#DCE7DF" stroke-width="4"/>
+  <rect x="660" y="380" width="240" height="108" rx="24" fill="#F5F8F4" stroke="#DCE7DF" stroke-width="4"/>
+  <path d="M820 190H1018C1040.09 190 1058 207.909 1058 230V425C1058 447.091 1040.09 465 1018 465H820C797.909 465 780 447.091 780 425V230C780 207.909 797.909 190 820 190Z" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="4"/>
+  <path d="M828 250H1008" stroke="#2D6A4F" stroke-width="14" stroke-linecap="round"/>
+  <path d="M828 295H970" stroke="#78A38B" stroke-width="14" stroke-linecap="round"/>
+  <path d="M828 340H942" stroke="#A8C2B1" stroke-width="14" stroke-linecap="round"/>
+  <path d="M950 390L996 344" stroke="#2D6A4F" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="1006" cy="336" r="18" fill="#2D6A4F"/>
+</svg>
