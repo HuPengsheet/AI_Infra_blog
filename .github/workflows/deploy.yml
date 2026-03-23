@@ -32,12 +32,13 @@ jobs:
 
       - name: Setup SSH key
         env:
-          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_SSH_KEY_B64: ${{ secrets.SERVER_SSH_KEY_B64 }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s' "$SERVER_SSH_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
+          printf '%s' "$SERVER_SSH_KEY_B64" | base64 -d > ~/.ssh/id_ed25519
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/id_ed25519
+          ssh-keygen -y -f ~/.ssh/id_ed25519 > /dev/null
 
       - name: Add server to known_hosts
         env:

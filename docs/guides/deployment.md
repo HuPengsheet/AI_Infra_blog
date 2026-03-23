@@ -78,7 +78,7 @@ npm run deploy
 .github/workflows/deploy.yml
 ```
 
-它会在你推送到 `main` 分支时自动：
+它会在你推送到 `master` 分支时自动：
 
 1. 安装依赖
 2. 构建站点
@@ -92,11 +92,25 @@ npm run deploy
 - `SERVER_PORT`：SSH 端口，默认一般是 `22`
 - `SERVER_USER`：服务器用户名，例如 `admin`
 - `SERVER_PATH`：站点目录，例如 `/var/www/ai-infra-notes`
-- `SERVER_SSH_KEY`：用于登录服务器的私钥内容
+- `SERVER_SSH_KEY_B64`：经过 base64 编码的 SSH 私钥内容
 
-### `SERVER_SSH_KEY` 填什么
+### `SERVER_SSH_KEY_B64` 填什么
 
-这里填的是你本地或专门为 GitHub Actions 生成的一把私钥全文，格式类似：
+推荐先生成一把专门给 GitHub Actions 使用的无密码私钥：
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/github_actions_deploy -N ""
+```
+
+然后把私钥做 base64 编码：
+
+```bash
+base64 -w 0 ~/.ssh/github_actions_deploy
+```
+
+把输出的一整行内容填入 GitHub Secret `SERVER_SSH_KEY_B64`。
+
+对应的原始私钥内容通常长这样：
 
 ```text
 -----BEGIN OPENSSH PRIVATE KEY-----
@@ -108,6 +122,12 @@ npm run deploy
 
 ```text
 ~/.ssh/authorized_keys
+```
+
+公钥查看命令：
+
+```bash
+cat ~/.ssh/github_actions_deploy.pub
 ```
 
 ### 自动部署前，服务器要先准备好
