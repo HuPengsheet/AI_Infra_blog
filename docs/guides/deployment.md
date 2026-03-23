@@ -70,6 +70,71 @@ npm run deploy
 2. 上传 `build/` 到服务器
 3. 在 Nginx 中把站点根目录指向该目录
 
+### 用 GitHub Actions 自动更新
+
+如果你希望后续维护更轻量，推荐直接使用仓库里的：
+
+```text
+.github/workflows/deploy.yml
+```
+
+它会在你推送到 `main` 分支时自动：
+
+1. 安装依赖
+2. 构建站点
+3. 通过 `rsync` 把 `build/` 同步到服务器
+
+### 需要在 GitHub Secrets 里配置的变量
+
+进入仓库的 `Settings -> Secrets and variables -> Actions`，新增这些 Secrets：
+
+- `SERVER_HOST`：服务器 IP 或域名，例如 `47.122.127.48`
+- `SERVER_PORT`：SSH 端口，默认一般是 `22`
+- `SERVER_USER`：服务器用户名，例如 `admin`
+- `SERVER_PATH`：站点目录，例如 `/var/www/ai-infra-notes`
+- `SERVER_SSH_KEY`：用于登录服务器的私钥内容
+
+### `SERVER_SSH_KEY` 填什么
+
+这里填的是你本地或专门为 GitHub Actions 生成的一把私钥全文，格式类似：
+
+```text
+-----BEGIN OPENSSH PRIVATE KEY-----
+...
+-----END OPENSSH PRIVATE KEY-----
+```
+
+对应的公钥需要提前追加到服务器用户的：
+
+```text
+~/.ssh/authorized_keys
+```
+
+### 自动部署前，服务器要先准备好
+
+- 已安装并启动 `nginx`
+- 已配置站点根目录为 `/var/www/ai-infra-notes`
+- `SERVER_USER` 对 `SERVER_PATH` 具有写权限
+
+### 推荐的首次验证方式
+
+第一次先在本地手动验证一次：
+
+```bash
+npm run build
+rsync -avz --delete build/ admin@47.122.127.48:/var/www/ai-infra-notes/
+```
+
+确认没问题后，再把相同参数写入 GitHub Secrets，后续就只需要：
+
+```bash
+git add .
+git commit -m "Update notes"
+git push
+```
+
+GitHub Actions 会自动完成发布。
+
 ## 推荐选择
 
 如果你想最少维护：
